@@ -1,0 +1,808 @@
+show databases;
+ 
+ CREATE DATABASE NORMALIZED;
+
+USE  NORMALIZED;
+
+show tables;
+
+-- DROP DATABASE NORMALIZED;
+-- 
+-- DROP TABLE FIRST;
+-- 
+-- DROP TABLE SECOND;
+-- 
+-- DROP TABLE THIRD;
+
+CREATE TABLE SECOND(
+
+PRODUCT_ID INT(20)    NOT NULL   ,
+
+PRODUCT_NAME VARCHAR(200) NOT NULL ,
+
+PRIMARY KEY(PRODUCT_ID)
+
+
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO SECOND (PRODUCT_ID , PRODUCT_NAME) VALUES ( 1, "PETROL");
+
+INSERT INTO SECOND (PRODUCT_ID , PRODUCT_NAME) VALUES ( 2, "DESIAL");
+
+
+SELECT * FROM SECOND;
+
+CREATE TABLE THIRD (
+
+YEAR_ID INT(20)  NOT NULL   ,
+
+TRADE_YEAR VARCHAR(200) NOT NULL ,
+
+PRIMARY KEY(YEAR_ID)
+
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO THIRD (YEAR_ID , TRADE_YEAR) VALUES ( 1, "2010");
+
+
+INSERT INTO THIRD (YEAR_ID , TRADE_YEAR) VALUES ( 2, "2000");
+
+
+SELECT * FROM THIRD;
+
+CREATE TABLE FIRST(
+
+ID INT(10)  unsigned NOT NULL  AUTO_INCREMENT ,
+
+PRODUCT_ID INT(20) NOT NULL,
+
+YEAR_ID INT(20) NOT NULL ,
+
+SALES  VARCHAR(100) ,
+
+PRIMARY KEY(ID),
+
+INDEX (PRODUCT_ID),
+
+INDEX (YEAR_ID),
+    
+CONSTRAINT FK_1 FOREIGN KEY (PRODUCT_ID) REFERENCES SECOND(PRODUCT_ID) ON UPDATE CASCADE
+        
+ON DELETE CASCADE,
+
+CONSTRAINT FK_2  FOREIGN KEY (YEAR_ID) REFERENCES THIRD(YEAR_ID) ON UPDATE CASCADE
+        
+ON DELETE CASCADE
+
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+   
+
+INSERT INTO FIRST  (ID,PRODUCT_ID,YEAR_ID,SALES)VALUES ( 1, 1,1,"12345");
+
+
+SELECT * FROM FIRST;
+
+
+
+
+SELECT min(SALE), max(SALE), avg(SALE) FROM DATA
+WHERE (YEAR >='2000' AND  YEAR <='2004'  AND PETROLEUM_PRODUCT = "Petrol") 
+ORDER by
+PETROLEUM_PRODUCT   ;
+
+
+
+
+
+axios
+    .get(
+      "https://raw.githubusercontent.com/younginnovations/internship-challenges/master/programming/petroleum-report/data.json"
+    )
+    .then((result) => {
+      start = "";
+      end = "";
+      item = "";
+      var myObj2;
+
+      for (let i = 0; i < result.data.length; i++) {
+        var product = result.data[i].petroleum_product;
+        var year = result.data[i].year;
+        // console.log(year);
+        if (product == "Petrol") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "Diesel") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "Kerosene") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "Aviation Turbine Fuel") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "Light Diesel Oil") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "Furnace Oil") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "LPG in MT") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        if (product == "Mineral Turpentine Oil") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+          }
+          if (year == 2005) {
+            start = year;
+            item = product;
+            end = 2009;
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+          }
+        }
+        let all = `SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE) FROM DATA
+        WHERE (YEAR BETWEEN '${start}' AND '${end}'
+        AND PETROLEUM_PRODUCT = '${product}')
+       
+         ;`;
+
+        db.all(all, [], (err, rows) => {
+          if (err) {
+            return console.error(err.message);
+          }
+
+          // console.log(rows[0]);
+          const removeEmptyOrNull = (obj) => {
+            Object.keys(obj).forEach(
+              (k) =>
+                (obj[k] &&
+                  typeof obj[k] === "object" &&
+                  removeEmptyOrNull(obj[k])) ||
+                (!obj[k] && obj[k] !== undefined && delete obj[k])
+            );
+
+            return obj;
+          };
+
+          myObj2 = removeEmptyOrNull(rows[0]);
+          console.log(myObj2);
+          // console.log(rows[0]["min(SALE)"]);
+        });
+        // res.render("index4", { model: myObj2 });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+//escond 
+
+
+         start = "";
+      end = "";
+      item = "";
+      db.serialize(function () {
+        // const sql_insert = db.prepare("INSERT INTO DATA VALUES (?,?,?,?)");
+        // let all = `SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE) FROM DATA
+        // WHERE (YEAR BETWEEN ? AND ?
+        // AND PETROLEUM_PRODUCT = ?);`;
+
+        let all = db.prepare(`SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE) FROM DATA
+        WHERE (YEAR BETWEEN '${start}' AND '${end}'
+        AND PETROLEUM_PRODUCT = '${product}') ;`);
+
+        for (let i = 0; i < result.data.length; i++) {
+          var year = result.data[i].year;
+          var product = result.data[i].petroleum_product;
+          var sale = result.data[i].sale;
+
+          if (product == "Petrol") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              a = all.run(start, end, item);
+              console.log(a);
+              // console.log(typeof all.run(start, end, item));
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "Diesel") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "Kerosene") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "Aviation Turbine Fuel") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "Light Diesel Oil") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "Furnace Oil") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "LPG in MT") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              end = 2009;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+          if (product == "Mineral Turpentine Oil") {
+            if (year == 2000) {
+              start = year;
+              end = 2004;
+              item = product;
+              all.run(start, end, item);
+            }
+            if (year == 2005) {
+              start = year;
+              item = product;
+              end = 2009;
+              all.run(start, end, item);
+            }
+            if (year == 2010) {
+              start = year;
+              end = 2014;
+              item = product;
+              all.run(start, end, item);
+            }
+          }
+        }
+        a = [all.finalize()];
+        // console.log(all.finalize());
+        // console.log(typeof a);
+
+
+
+         let all = db.prepare(`SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE) FROM DATA
+        WHERE (YEAR BETWEEN '${start}' AND '${end}'
+        AND PETROLEUM_PRODUCT = '${product}') ;`);
+    const params = { $field: field, $value: value, $limit: limit };
+    stmt.each(params, (err, row) => {
+      res.push(row[field]);
+    });
+
+
+    ///third  
+
+
+     var a = [];
+  start = "";
+  end = "";
+  item = "";
+
+  // var all = db.prepare(`SELECT  PETROLEUM_PRODUCT , YEAR , min(SALE), max(SALE) ,avg(SALE)
+  //       FROM DATA
+  //       WHERE (YEAR BETWEEN '${start}' AND '${end}'
+  //       AND PETROLEUM_PRODUCT = '${item}') ;`);
+
+  axios
+    .get(
+      "https://raw.githubusercontent.com/younginnovations/internship-challenges/master/programming/petroleum-report/data.json"
+    )
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        var product = result.data[i].petroleum_product;
+        var year = result.data[i].year;
+
+        // let all = db.prepare(`SELECT  PETROLEUM_PRODUCT , YEAR , min(SALE), max(SALE) ,avg(SALE)
+        //     FROM DATA
+        //     WHERE (YEAR BETWEEN ${start} AND ${end}
+        //     AND PETROLEUM_PRODUCT = ${item}) ;`);
+        // var start = "";
+        // var end = "";
+        // var item = "";
+
+        // var all = db.prepare(`SELECT  PETROLEUM_PRODUCT , YEAR , min(SALE), max(SALE) ,avg(SALE)
+        //   FROM DATA
+        //   WHERE (YEAR BETWEEN '${start}' AND '${end}'
+        //   AND PETROLEUM_PRODUCT = '${item}') ;`);
+
+        if (product == "Petrol") {
+          if (year == 2000) {
+            start = year;
+            end = 2004;
+            item = product;
+            var all = db.prepare(`SELECT  PETROLEUM_PRODUCT , YEAR , min(SALE), max(SALE) ,avg(SALE)
+            FROM DATA
+            WHERE (YEAR BETWEEN '${start}' AND '${end}'
+            AND PETROLEUM_PRODUCT = '${item}') ;`);
+            all.each((err, row) => {
+              // res.render("index4", { model: row });
+              a.push(row);
+              // console.log(row);
+              // res.render("index4", {});
+            });
+          }
+          if (year == 2005) {
+            start = year;
+            end = 2009;
+            item = product;
+            var all = db.prepare(`SELECT  PETROLEUM_PRODUCT , YEAR , min(SALE), max(SALE) ,avg(SALE)
+            FROM DATA
+            WHERE (YEAR BETWEEN '${start}' AND '${end}'
+            AND PETROLEUM_PRODUCT = '${item}') ;`);
+            all.each((err, row) => {
+              // res.render("index4", { model: row });
+              // console.log(row);
+              a.push(row);
+              // res.render("index4", {});
+            });
+          }
+          if (year == 2010) {
+            start = year;
+            end = 2014;
+            item = product;
+            var all = db.prepare(`SELECT  PETROLEUM_PRODUCT , YEAR , min(SALE), max(SALE) ,avg(SALE)
+            FROM DATA
+            WHERE (YEAR BETWEEN '${start}' AND '${end}'
+            AND PETROLEUM_PRODUCT = '${item}') ;`);
+            all.each((err, row) => {
+              // res.render("index4", { model: row });
+              a.push(row);
+              // console.log(row);
+              console.log(a);
+              // res.render("index4", {});
+            });
+          }
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  // for testing
+
+  // if (product == "Diesel") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     end = 2009;
+  //     item = product;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // if (product == "Kerosene") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     end = 2009;
+  //     item = product;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // if (product == "Aviation Turbine Fuel") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     end = 2009;
+  //     item = product;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // if (product == "Light Diesel Oil") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     end = 2009;
+  //     item = product;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // if (product == "Furnace Oil") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     end = 2009;
+  //     item = product;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // if (product == "LPG in MT") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     end = 2009;
+  //     item = product;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // if (product == "Mineral Turpentine Oil") {
+  //   if (year == 2000) {
+  //     start = year;
+  //     end = 2004;
+  //     item = product;
+  //   }
+  //   if (year == 2005) {
+  //     start = year;
+  //     item = product;
+  //     end = 2009;
+  //   }
+  //   if (year == 2010) {
+  //     start = year;
+  //     end = 2014;
+  //     item = product;
+  //   }
+  // }
+  // );
+
+
+  /// last 
+    <% for(var i=0; i < model.length; i++) { %>
+      <tr>
+        <td><%= model['PETROLEUM_PRODUCT'] %></td>
+        <td><%= model.YEAR'] %></td>
+        <td><%= model['min(SALE)']%></td>
+        <td><%= model['max(SALE)'] %></td>
+        <td><%= model['avg(SALE)'] %></td>
+      </tr>
+      <% } %>
+
+
+
+
+      ///
+      db.serialize(function () {
+        db.run(
+          "CREATE TABLE IF NOT EXISTS DATA (ID ,Year,Petroleum_product, Sale )"
+        );
+        const sql_insert = db.prepare("INSERT INTO DATA VALUES (?,?,?,?)");
+        for (let i = 0; i < result.data.length; i++) {
+          var year = result.data[i].year;
+          var petroleumProduct = result.data[i].petroleum_product;
+          var sale = result.data[i].sale;
+          sql_insert.run(i, year, petroleumProduct, sale);
+        }
+        sql_insert.finalize();
+        res.render("home");
+      });
+
+
+      //out.forEach((row) => {
+        a = row.start;
+        b = row.end;
+        c = row.item;
+        // console.log(a);
+        // console.log(row);
+        let all = `SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE)
+      FROM DATA WHERE (YEAR BETWEEN ? AND ?
+      AND PETROLEUM_PRODUCT = ?) ;`;
+        db.all(all, [a, b, c], (err, rows) => {
+          if (err) {
+            throw err;
+          }
+          rows.forEach((row) => {
+            console.log(row);
+            res.render("index4", { model: row });
+          });
+
+          // console.log(rows);
+        });
+      });
+
+      ///finalize
+
+SET @id = 11111;
+SET @calculations_date = "2019-05-05";
+SET @calculations_date_minus_1_year = DATE_SUB(@calculations_date, INTERVAL 1 YEAR);
+
+SELECT customers.id,
+
+IFNULL( (SELECT COUNT(DISTINCT id) FROM customer_data
+ WHERE id = @id AND customer_data.date >= DATE_SUB(@calculations_date, INTERVAL 2 YEAR) 
+ AND customer_data.date <= @calculations_date) , 0) as customers_in_last_24_months,
+
+SET @id = 11111;
+SET @product = ?;
+SET @start = ?;
+SET @end = ?;
+
+        SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE)
+        FROM DATA WHERE (YEAR BETWEEN @start AND @end
+        AND PETROLEUM_PRODUCT = @product) ;`;
+
+
+SELECT  PETROLEUM_PRODUCT, YEAR,min(SALE), max(SALE), avg(SALE)
+        FROM DATA WHERE ( DATA.YEAR = DATE_SUB(@calculations_date, INTERVAL 5 YEAR) 
+ AND DATA.YEAR <= @calculations_date) , 0) as customers_in_last_24_months,
+        AND PETROLEUM_PRODUCT =  @product) ;
+
+IFNULL( (SELECT COUNT(DISTINCT id) FROM customer_data
+ WHERE id = @id AND customer_data.date >= DATE_SUB(@calculations_date, INTERVAL 2 YEAR) 
+ AND customer_data.date <= @calculations_date) , 0) as customers_in_last_24_months,
+
+IFNULL( (SELECT SUM(amount) FROM other_customer_data WHERE 
+id = @id AND date <= @calculations_date_minus_1_year), 0) 
+AS total_other_customer_data_until_12_months_before_date,
+
+IFNULL( (SELECT SUM(amount) FROM other_customer_data2 WHERE 
+id = @id AND date <= @calculations_date_minus_1_year), 0) 
+AS total_other_customer_data2_until_12_months_before_date,
+
+
+IFNULL( (SELECT SUM(amount) FROM other_customer_data3 WHERE 
+id = @id AND date <= @calculations_date_minus_1_year), 0) 
+AS total_other_customer_data3_until_12_months_before_date,
+
+FROM customers
+
+WHERE customers.id = @id;
+
+
+
+var sql  = @"insert MyTable(colA, colB) values (@a, @b);
+select case(scope_identity() as bigint);";
+var parameters = new[] { new { a=1, b=1 }, new { a=2, b=2 }, new { a=3, b=3 } }; 
+List<long> ids = new List<long>();    
+foreach(var param in parameters) {
+    ids.AddRange(connection.Query<long>(sql, param));
+}
+
+
+_SQLite_QuerySingleRow(-1, "SELECT distance FROM fulldata WHERE Start = '" & $start & "' AND End = '" & $end & "';", $aRow)

@@ -1,0 +1,39 @@
+<%- include("header") -%>
+<br />
+<h1>Fetched Data From Given API Sucessfully</h1>
+<hr />
+<br />
+<% for(var i=0; i < output.length; i++) { %>
+<div class="container">
+  <div class="card" style="width: 18rem">
+    <ul class="list-group">
+      <div class="card-header">Data Number <%= i %></div>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        YEAR
+        <span class="badge badge-primary badge-pill">
+          <%= output[i].year %></span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        ITEM
+        <span class="badge badge-primary badge-pill">
+          <%= output[i].petroleum_product %></span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        SALES
+        <span class="badge badge-primary badge-pill">
+          <%= output[i].sale %></span
+        >
+      </li>
+    </ul>
+  </div>
+  <br />
+</div>
+<% } %> <%- include("footer") -%>

@@ -1,0 +1,37 @@
+<%- include("header") -%>
+<h1>MIN, MAX & AVERAGE Data Shown Sucessfully</h1>
+<br>
+<h4>
+  Generate report showing min, max and average Sale of each Petroleum Product
+  for 5 years interval.
+</h4>
+ <br> <br>
+<div class="table-responsive-sm">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Year</th>
+        <th>Min</th>
+        <th>Max</th>
+        <th>Avg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  
+          <tr>
+            <td><%= model.PETROLEUM_PRODUCT %></td>
+            <td><%= model.YEAR %></td>
+         
+            <td><%= model['min(SALE)']%></td>
+            <td><%= model['max(SALE)'] %></td>
+            <td><%= model['avg(SALE)'] %></td>
+          </tr>
+       
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%- include("footer") -%>

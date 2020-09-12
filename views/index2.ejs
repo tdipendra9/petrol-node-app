@@ -1,0 +1,33 @@
+<%- include("header") -%>
+<br />
+<h1>Fetched Unormalized Data From SQLite Database Sucessfully</h1>
+<hr />
+<br />
+<h1 class="">List of Data (<%= model.length %>)</h1>
+<hr />
+<br />
+<div class="container">
+  <div class="table-responsive-sm">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>YEAR</th>
+          <th>PETROLEUM PRODUCT</th>
+          <th>SALE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const data of model) { %>
+        <tr>
+          <td><%= data.ID %></td>
+          <td><%= data.YEAR %></td>
+          <td><%= data.PETROLEUM_PRODUCT%></td>
+          <td><%= data.SALE %></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- include("footer") -%>

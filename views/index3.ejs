@@ -1,0 +1,76 @@
+<%- include("header") -%>
+<br />
+<h1 class="">Fetch Normalized Data From SQLite Database Sucessfully</h1>
+<hr />
+<br />
+<div class="row">
+  <div class="col">
+    <h1>SECOND TABLE</h1>
+    <div class="table-responsive-sm">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>PRODUCT ID</th>
+            <th>PRODUCT NAME</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const data of second) { %>
+          <tr>
+            <td><%= data.PRODUCT_ID %></td>
+            <td><%= data.PRODUCT_NAME %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col">
+    <h1>THIRD TABLE</h1>
+    <div class="table-responsive-sm">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>YEAR ID</th>
+            <th>TRADE YEAR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const data of third) { %>
+          <tr>
+            <td><%= data.YEAR_ID %></td>
+            <td><%= data.TRADE_YEAR %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<hr />
+<br />
+<h2>FIRST TABLE</h2>
+<div class="table-responsive-sm">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>YEAR ID</th>
+        <th>PRODUCT ID</th>
+        <th>SALES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const data of first) { %>
+      <tr>
+        <td><%= data.ID %></td>
+        <td><%= data.YEAR_ID %></td>
+        <td><%= data.PRODUCT_ID %></td>
+        <td><%= data.SALES %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include("footer") -%>
